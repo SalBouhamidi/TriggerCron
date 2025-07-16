@@ -29,3 +29,4 @@ jobs:
           echo "company reminder API call failed with status code: $response"
           cat response.txt
           exit 1
+        fi
