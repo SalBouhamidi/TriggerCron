@@ -1,0 +1,36 @@
+name: Reminder
+
+on:
+  schedule:
+    - cron: '55 10 * * *'
+  
+  workflow_dispatch:
+
+jobs:
+  call-company-reminder:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Call Company Reminder API
+      run: |
+        echo "the request was made at: $(date)"
+        
+        response=$(curl -s -w "%{http_code}" -o response.txt "https://api.ajisalit.com/order/company-reminder")
+        
+        echo "HTTP Status Code: $response"
+        
+        if [ "$response" -eq 200 ]; then
+          echo "notification sent successfully"
+          cat response.txt
+        else
+          echo "company reminder API call failed with status code: $response"
+          cat response.txt
+          exit 1
+        fi
+    - name: Debug Timezone
+      run: |
+        echo "UTC time: $(date -u)"
+        echo "Morocco time: $(TZ='Africa/Casablanca' date)"
