@@ -1,0 +1,24 @@
+name: Scheduled Hello Job
+
+on:
+  schedule:
+    - cron: '05 11 * * *'
+  
+  workflow_dispatch:
+
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Echo Hello
+      run: |
+        echo "Hello! This job ran at $(date)"
+        echo "Current time: $(date '+%Y-%m-%d %H:%M:%S UTC')"
+        echo "Hello from GitHub Actions scheduled job!"
+    
+    - name: Show system info
+      run: |
+        echo "Running on: $(uname -a)"
+        echo "Current directory: $(pwd)"
+        echo "Available space: $(df -h /)"
