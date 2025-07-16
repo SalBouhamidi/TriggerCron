@@ -30,3 +30,7 @@ jobs:
           cat response.txt
           exit 1
         fi
+    - name: Debug Timezone
+      run: |
+        echo "UTC time: $(date -u)"
+        echo "Morocco time: $(TZ='Africa/Casablanca' date)"
