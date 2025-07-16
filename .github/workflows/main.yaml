@@ -2,7 +2,7 @@ name: Daily Company Reminder API Call
 
 on:
   schedule:
-    - cron: '21 10 * * *'
+    - cron: '29 9 * * *'
   
   workflow_dispatch:
 
